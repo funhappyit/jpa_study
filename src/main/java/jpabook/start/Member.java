@@ -1,17 +1,16 @@
 package jpabook.start;
 
-
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="MEMBER")
+@Access(AccessType.FIELD)
 public class Member {
     @Id
     @Column(name="ID")
     private String id; //아이디
-    @Column(name="NAME")
+
+    @Column(name="NAME", nullable=false,length = 10) //추가
     private String username; //이름
 
     private Integer age; // 나이
