@@ -30,8 +30,13 @@ public class JpaMain {
 
     //비즈닌스 로직
     private static void logic(EntityManager em){
-        Board board = new Board();
-        em.persist(board);
-        System.out.println("board.id = "+board.getId());
+        //주문한 회원
+//        Order order = em.find(Order.class,1);
+//        Member member = order.getMember();
+
+        //주문한 상품 하나를 객체 그래프로 탐색해보자
+        Order order = em.find(Order.class,1);
+        OrderItem orderItem = order.getOrderItems().get(0);
+        Item item= orderItem.getItem();
     }
 }

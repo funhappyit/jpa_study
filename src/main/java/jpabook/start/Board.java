@@ -2,12 +2,12 @@ package jpabook.start;
 
 import javax.persistence.*;
 
-@Entity
-@TableGenerator(
-        name="BOARD_SEQ_GENERATOR",
-        table="MY_SEQUENCES",
-        pkColumnName = "BOARD_SEQ",allocationSize = 1
-)
+//@Entity
+//@TableGenerator(
+//        name="BOARD_SEQ_GENERATOR",
+//        table="MY_SEQUENCES",
+//        pkColumnName = "BOARD_SEQ",allocationSize = 1
+//)
 public class Board {
 
     @Id
