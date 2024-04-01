@@ -18,7 +18,7 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         try{
             tx.begin(); //[트랜잭션] -시작
-   //         logic(em); //비즈니스 로직 실행
+            logic(em); //비즈니스 로직 실행
             tx.commit(); //[트랜잭션] - 커밋
         }catch (Exception e){
             tx.rollback(); //[트랜잭션] - 롤백
@@ -30,13 +30,15 @@ public class JpaMain {
 
     //비즈닌스 로직
     private static void logic(EntityManager em){
-        //주문한 회원
-//        Order order = em.find(Order.class,1);
-//        Member member = order.getMember();
+        Delivery delivery = new Delivery();
+        OrderItem orderItem1 = new OrderItem();
+        OrderItem orderItem2 = new OrderItem();
 
-        //주문한 상품 하나를 객체 그래프로 탐색해보자
-        Order order = em.find(Order.class,1);
-        OrderItem orderItem = order.getOrderItems().get(0);
-        Item item= orderItem.getItem();
+        Order order = new Order();
+        order.setDelivery(delivery);
+        order.addOrderItem(orderItem1);
+        order.addOrderItem(orderItem2);
+
+        em.persist(order);
     }
 }
