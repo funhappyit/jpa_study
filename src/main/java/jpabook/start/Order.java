@@ -8,18 +8,19 @@ import java.util.List;
 @Entity
 @Table(name="ORDERS")
 public class Order extends BaseEntity{
+
     @Id @GeneratedValue
     @Column(name="ORDER_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="MEMBER_ID")
     private Member member; //주문 회원
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name="DELIVERY_ID")
     private Delivery delivery; //배송 정보
 
