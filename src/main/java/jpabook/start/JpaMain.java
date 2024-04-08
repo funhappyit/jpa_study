@@ -1,9 +1,15 @@
 package jpabook.start;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import java.util.List;
 
 public class JpaMain {
@@ -18,7 +24,7 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         try{
             tx.begin(); //[트랜잭션] -시작
-            logic(em); //비즈니스 로직 실행
+            criteriaQuery(em); //비즈니스 로직 실행
             tx.commit(); //[트랜잭션] - 커밋
         }catch (Exception e){
             tx.rollback(); //[트랜잭션] - 롤백
@@ -41,4 +47,31 @@ public class JpaMain {
 
         em.persist(order);
     }
+
+    private static void multiQueryEntity(EntityManager em){
+        List resultList = em.createQuery("select i from Item i where treat (i as Book ).author = 'kim'").getResultList();
+    }
+    private static void qlString(EntityManager em){
+        String qlString = "select m from Member m where m.id = :memberId";
+        List resultList = em.createQuery(qlString)
+            .setParameter("memberId",4L)
+            .getResultList();
+    }
+    private static void nameQuery(EntityManager em){
+        List<Member> resultList = em.createNamedQuery("Member.findByUsername",Member.class)
+            .setParameter("name","회원1")
+            .getResultList();
+    }
+
+    private static void criteriaQuery(EntityManager em){
+        CriteriaBuilder cb = em.getCriteriaBuilder();//Criteria 쿼리 빌더
+        CriteriaQuery<Member> cq = cb.createQuery(Member.class);
+        Root<Member> m = cq.from(Member.class);
+        cq.select(m);
+        TypedQuery<Member> query = em.createQuery(cq);
+        List<Member> members = query.getResultList();
+    }
+
+
+
 }

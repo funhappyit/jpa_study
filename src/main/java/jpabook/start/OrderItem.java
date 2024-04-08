@@ -2,8 +2,8 @@ package jpabook.start;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="ORDER_ITEM")
+// @Entity
+// @Table(name="ORDER_ITEM")
 public class OrderItem {
 
     @Id @GeneratedValue

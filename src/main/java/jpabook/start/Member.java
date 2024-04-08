@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQuery(
+    name="Member.findByUsername",
+    query ="select m from Member m where m.name=:name"
+)
 public class Member{
 
     @Id @GeneratedValue
@@ -15,8 +19,8 @@ public class Member{
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
+    // @OneToMany(mappedBy = "member")
+    // private List<Order> orders = new ArrayList<>();
 
     public Address getAddress() {
         return address;
@@ -42,11 +46,11 @@ public class Member{
         this.name = name;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
+    // public List<Order> getOrders() {
+    //     return orders;
+    // }
+    //
+    // public void setOrders(List<Order> orders) {
+    //     this.orders = orders;
+    // }
 }

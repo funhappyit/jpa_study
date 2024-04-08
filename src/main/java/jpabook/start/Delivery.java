@@ -2,7 +2,7 @@ package jpabook.start;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Delivery {
 
 	@Id @GeneratedValue

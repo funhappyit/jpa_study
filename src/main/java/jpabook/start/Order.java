@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name="ORDERS")
+//@Entity
+// @Table(name="ORDERS")
 public class Order extends BaseEntity{
 
     @Id @GeneratedValue
@@ -30,14 +30,14 @@ public class Order extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //주문상태
     //연관관계 메소드
-    public void setMember(Member member) {
-        //기존 관계 제거
-        if(this.member != null){
-            this.member.getOrders().remove(this);
-        }
-        this.member = member;
-        member.getOrders().add(this);
-    }
+    // public void setMember(Member member) {
+    //     //기존 관계 제거
+    //     if(this.member != null){
+    //         this.member.getOrders().remove(this);
+    //     }
+    //     this.member = member;
+    //     member.getOrders().add(this);
+    // }
 
     public void addOrderItem(OrderItem orderItem){
         orderItems.add(orderItem);

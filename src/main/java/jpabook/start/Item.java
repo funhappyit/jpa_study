@@ -18,8 +18,8 @@ public abstract class Item {
     private int price; //가격
     private int stockQuantity; //재고수량
 
-    @ManyToMany(mappedBy = "items")
-    private List<Category> categories = new ArrayList<>();
+    // @ManyToMany(mappedBy = "items")
+    // private List<Category> categories = new ArrayList<>();
 
     public Long getId() {
         return id;
